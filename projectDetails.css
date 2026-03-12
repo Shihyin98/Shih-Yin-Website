@@ -1,0 +1,354 @@
+/* --- 基礎樣式 --- */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+    color: var(--primary);
+}
+
+.back-link:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.15);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+
+.detail-header {
+    margin-bottom: 2.5rem;
+}
+
+.detail-header h1 {
+    font-size    : 2.5rem;
+    color        : var(--dark);
+    margin-bottom: 1rem;
+}
+
+.detail-tags {
+    display  : flex;
+    gap      : 10px;
+    flex-wrap: wrap;
+}
+
+.detail-tags span {
+    background: var(--light);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: background 0.3s, transform 0.3s, color 0.3s;
+    cursor: default;
+}
+
+
+.detail-tags span:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* --- 媒體容器 (Slider + Video) --- */
+
+
+.media-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+
+/* Slider 樣式 */
+.slider-container {
+    position: relative;
+}
+
+.slider-wrapper {
+    display   : flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    position : relative;
+}
+
+/* --- Slider 圖片等比例顯示 --- */
+.slide img {
+    width     : 100%;
+    height    : 400px;
+    object-fit: contain;
+    /* 關鍵：確保圖片填滿高度且不變形（會裁切兩側） */
+    background: #f8fafc;
+    display   : block;
+}
+
+
+.slider-btn {
+    position  : absolute;
+    top       : 50%;
+    transform : translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color     : #fff;
+    border    : none;
+    padding   : 12px 8px;
+    cursor    : pointer;
+    z-index   : 5;
+    transition: 0.3s;
+}
+
+.slider-btn:hover {
+    background: #2563eb;
+}
+
+.slider-btn.next {
+    right        : 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.slider-btn.prev {
+    left         : 0;
+    border-radius: 0 4px 4px 0;
+}
+
+
+
+
+/* --- 藍點：放在圖片下方 --- */
+.slider-dots {
+    /* 移除 absolute 定位，讓它排在圖片下方 */
+    display        : flex;
+    justify-content: center;
+    gap            : 8px;
+    padding        : 15px 0;
+    /* 增加上下間距，與圖片和縮圖隔開 */
+    background     : #ffffff;
+    /* 背景改回白色 */
+    z-index        : 5;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: var(--primary);
+    width: 20px;
+    border-radius: 10px;
+}
+
+
+/* Video 樣式 */
+.video-wrapper {
+    position      : relative;
+    padding-bottom: 56.25%;
+    height        : 0;
+    background    : #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+}
+
+.media-caption {
+    padding   : 10px;
+    text-align: center;
+    font-size : 0.85rem;
+    color     : #64748b;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* --- 內容與側邊欄 --- */
+.detail-content {
+    display              : grid;
+    grid-template-columns: 2fr 1fr;
+    gap                  : 40px;
+}
+
+.info-section h3 {
+    margin      : 2rem 0 1rem;
+    color       : var(--dark);
+    border-left : 4px solid var(--primary);
+    padding-left: 15px;
+}
+
+.feature-grid {
+    display              : grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap                  : 15px;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+
+.feature-card:hover {
+    border-color: var(--primary);
+    transform   : translateY(-5px);
+}
+
+.feature-card i {
+    color        : var(--primary);
+    font-size    : 1.2rem;
+    margin-bottom: 10px;
+    display      : block;
+}
+
+.sidebar-box {
+    background   : #fff;
+    padding      : 2rem;
+    border-radius: 12px;
+    box-shadow   : var(--shadow);
+    position     : sticky;
+    top          : 100px;
+    border       : 1px solid #e2e8f0;
+}
+
+.sidebar-info-list {
+    list-style: none;
+    padding   : 0;
+}
+
+.sidebar-info-list li {
+    display        : flex;
+    justify-content: space-between;
+    font-size      : 0.9rem;
+    margin-bottom  : 15px;
+    border-bottom  : 1px solid #f8fafc;
+    padding-bottom : 5px;
+}
+
+.sidebar-info-list li span {
+    font-weight: 600;
+    color      : #64748b;
+}
+
+.project-links {
+    display       : flex;
+    flex-direction: column;
+    gap           : 10px;
+    margin-top    : 1.5rem;
+}
+
+/* 修改側邊欄標題樣式 */
+.sidebar-box h4 {
+    text-align   : center;
+    /* 標題置中 */
+    margin-bottom: 0.75rem;
+    /* 下行留約半行間距（1rem 為一行，0.75rem 視覺上接近半行） */
+    color        : #0f172a;
+    /* 確保顏色與設計一致 */
+    font-size    : 1.1rem;
+    /* 稍微調整標題大小 */
+    margin-bottom: 15px;
+}
+
+
+/* 修改 projectDetail.css 中的按鈕樣式 */
+.btn-primary {
+    background     : var(--primary);
+    color          : white;
+    padding        : 12px;
+    border-radius  : 8px;
+    text-align     : center;
+    text-decoration: none;
+    font-weight    : 600;
+    transition     : 0.3s;
+}
+
+.btn-secondary {
+    background     : transparent;
+    color          : var(--primary);
+    padding        : 12px;
+    border         : 1px solid var(--primary);
+    /* 增加邊框 */
+    border-radius  : 8px;
+    text-align     : center;
+    text-decoration: none;
+    font-weight    : 600;
+    transition     : 0.3s;
+    display        : flex;
+    /* 使用 flex 讓圖示與文字對齊 */
+    justify-content: center;
+    align-items    : center;
+    gap            : 8px;
+}
+
+.btn-secondary:hover {
+    background: rgba(37, 99, 235, 0.05);
+    /* 輕微背景色 */
+    transform : translateY(-2px);
+}
+
+
+
+
+/* --- 預覽縮圖：維持在圖片下方 --- */
+.slider-thumbs {
+    display        : flex;
+    justify-content: center;
+    gap            : 10px;
+    padding        : 15px;
+    background     : #ffffff;
+    border-top     : 1px solid #e2e8f0;
+}
+
+.thumb {
+    width        : 60px;
+    height       : 40px;
+    object-fit   : cover;
+    border-radius: 4px;
+    cursor       : pointer;
+    opacity      : 0.6;
+    border       : 2px solid transparent;
+    transition   : 0.3s;
+}
+
+.thumb.active {
+    opacity: 1;
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+
+/* --- RWD --- */
+@media (max-width: 992px) {
+    .detail-content {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-box {
+        position  : static;
+        margin-top: 30px;
+    }
+
+    .slide img {
+        height: 250px;
+        /* 手機版建議高度縮小 */
+    }
+}
+

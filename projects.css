@@ -1,0 +1,107 @@
+/* --- 作品集 (Projects) --- */
+.project-grid {
+    display: grid;
+    /* 設定卡片固定在 320px 到 1fr 之間切換 */
+    /* 這會確保卡片至少有 320px 寬，若空間不足則自動換行 */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 2rem;
+    justify-content: center; /* 讓卡片在不滿一行時居中 */
+}
+
+.project-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+    
+    /* 強制設定卡片的最大寬度，避免在超大螢幕上過扁 */
+    max-width: 400px; 
+    width: 100%;
+    margin: 0 auto; /* 配合 max-width 居中 */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 確保圖片容器比例固定 */
+.project-img-container {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    flex-shrink: 0; /* 防止圖片被壓縮 */
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-overlay {
+    position       : absolute;
+    top            : 0;
+    left           : 0;
+    width          : 100%;
+    height         : 100%;
+    background     : rgba(15, 23, 42, 0.8);
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    opacity        : 0;
+    transition     : 0.3s;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+/* 篩選器容器 */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* 卡片內的 Tags 樣式 */
+.tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    background: var(--border);
+    color: var(--text);
+    border-radius: 4px;
+}
