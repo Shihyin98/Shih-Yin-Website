@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="project-info">
                 <h3 style="margin-bottom: 10px;">${p.title}</h3>
                 <p style="font-size: 0.9rem; color: #64748b;">${p.desc}</p>
+              ${p.kpi ? `<p class="project-kpi">${p.kpi}</p>` : ""}
                 <div class="tags">
                     ${p.hashTags ? p.hashTags.map((h) => `<span class="hashTag">${h}</span>`).join("") : ""}
                     ${p.tags
@@ -236,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <p class="item-desc">${p.desc}</p>
+        ${p.kpi ? `<p class="item-kpi">${p.kpi}</p>` : ""}
         <div class="item-tags">
           ${p.hashTags ? p.hashTags.map((hashTag) => `<span class="hashTag">${hashTag}</span>`).join("") : ""}
           ${p.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
