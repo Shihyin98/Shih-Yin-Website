@@ -1,2 +1,3 @@
 # Shih-Yin-Website
-Persnal Website for SideProject in 2026
+
+Personal Website for SideProject in 2026

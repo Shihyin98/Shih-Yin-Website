@@ -22,6 +22,11 @@ body {
     background : var(--light);
     /* 重要：預留空間給固定在頂部的導覽列，避免內容被遮擋 */
     padding-top: 100px;
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden;
 }
 
 .container {
@@ -77,9 +82,9 @@ body {
     /* 捲動時稍微往上靠攏 */
     padding                : 0.7rem 0;
     background             : rgba(255, 255, 255, 0.9);
-    backdrop-filter        : blur(10px);
-    /* 磨砂玻璃效果 */
     -webkit-backdrop-filter: blur(10px);
+    /* 磨砂玻璃效果 */
+    backdrop-filter        : blur(10px);
 }
 
 .navbar .container {
@@ -157,6 +162,8 @@ section {
     min-height     : 80vh;
     gap            : 2rem;
     padding        : 2rem 0;
+    max-width      : 100%;
+    overflow-x     : hidden;
 }
 
 /* --- 左側內容 --- */
@@ -191,8 +198,9 @@ section {
 /* 背景代碼圖片飾點 */
 .code-img-decoration {
     position      : absolute;
-    width         : 120%;
-    /* 稍微大於容器，方便旋轉不留白 */
+    width         : 100%;
+    max-width     : 450px;
+    /* 防止太寬撐開頁面 */
     opacity       : 0.15;
     /* 控制透明度，不要太搶戲 */
     z-index       : 1;
@@ -344,73 +352,110 @@ section {
 .marquee-wrapper {
     display           : flex;
     overflow          : hidden;
+    -webkit-user-select: none;
     user-select       : none;
-    /* 確保容器高度足以容納 Hover 時的位移 */
-    padding           : 10px 0;
-    mask-image        : linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    padding           : 20px 0;
 }
 
 .marquee-content {
-    display  : flex;
-    gap      : 1.5rem;
-    animation: scroll-marquee 30s linear infinite;
+    display      : flex;
+    gap          : 1.5rem;
+    animation    : scroll-marquee 40s linear infinite;
 }
 
 .marquee-item {
-    flex           : 0 0 300px;
-    /* 調整這裡的 padding 可以直接改變卡片的高度 */
-    padding        : 1rem 1.2rem;
-    background     : var(--white);
-    border-radius  : 12px;
-    border         : 1px solid var(--border);
-    display        : flex;
-    align-items    : center;
-    gap            : 1rem;
-    text-decoration: none;
-    color          : inherit;
-    transition     : 0.3s;
-    /* 確保所有卡片高度一致 */
-    height         : 80px;
+    flex            : 0 0 420px;
+    padding         : 1.8rem;
+    background      : var(--white);
+    border-radius   : 16px;
+    border          : 1px solid var(--border);
+    display         : flex;
+    flex-direction  : column;
+    justify-content : flex-start;
+    gap             : 1.2rem;
+    text-decoration : none;
+    color           : inherit;
+    transition      : all 0.3s ease;
+    min-height      : 240px;
 }
 
 .marquee-item:hover {
-    transform   : translateY(-5px);
+    transform   : translateY(-8px);
     border-color: var(--primary);
-    box-shadow  : var(--shadow);
+    box-shadow  : 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.item-header {
+    display      : flex;
+    align-items  : center;
+    gap          : 1rem;
 }
 
 .marquee-visual {
-    /* 縮小視覺圖示，讓高度更緊湊 */
-    width          : 40px;
-    height         : 40px;
-    border-radius  : 8px;
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
-    color          : white;
-    font-size      : 1.2rem;
-    font-weight    : bold;
-    flex-shrink    : 0;
+    width               : 56px;
+    height              : 56px;
+    border-radius       : 12px;
+    overflow            : hidden;
+    flex-shrink         : 0;
+    border              : 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.marquee-info {
+    flex: 1;
 }
 
 .marquee-info h4 {
-    font-size    : 0.9rem;
+    font-size    : 1.1rem;
     color        : var(--dark);
-    margin-bottom: 2px;
+    margin-bottom: 0;
+    font-weight  : 600;
+    line-height  : 1.3;
 }
 
-.marquee-info p {
-    font-size    : 0.8rem;
+.item-desc {
+    font-size    : 0.95rem;
     color        : var(--text);
-    white-space  : nowrap;
+    line-height  : 1.5;
+    margin       : 0;
+    display      : -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp   : 3;
+    -webkit-box-orient: vertical;
     overflow     : hidden;
     text-overflow: ellipsis;
-    /* 限制文字寬度避免撐開高度 */
-    max-width    : 200px;
+    text-align   : left;
+    align-self   : stretch;
 }
 
-/* 跑馬燈動畫維持不變 */
+.item-tags {
+    display   : flex;
+    flex-wrap : wrap;
+    gap       : 0.6rem;
+    margin-top: 0.2rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    background: var(--border);
+    color: var(--text);
+    border-radius: 4px;
+}
+
+.hashTag {
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    background: #b6d5f7;
+    color: #53607e;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* 跑馬燈無縫滾動動畫 */
 @keyframes scroll-marquee {
     from {
         transform: translateX(0);
@@ -421,9 +466,7 @@ section {
     }
 }
 
-.marquee-wrapper:hover .marquee-content {
-    animation-play-state: paused;
-}
+
 
 
 /* --- 6. 手機版 RWD 回應式設計 --- */
@@ -492,11 +535,40 @@ section {
         /* 額外確保外邊距自動平衡 */
     }
 
+    /* 單列跑馬燈響應式 */
+    .marquee-item {
+        flex      : 0 0 86vw;
+        max-width : 420px;
+        min-height: 0;
+        height    : auto;
+    }
 
+    .item-desc {
+        display            : block;
+        -webkit-line-clamp : unset;
+        line-clamp         : unset;
+        -webkit-box-orient : unset;
+        overflow           : visible;
+        text-overflow      : clip;
+    }
 
     .footer-sub {
         flex-direction: column;
         gap           : 10px;
         text-align    : center;
+    }
+}
+
+/* 平板版本 */
+@media (max-width: 1024px) {
+    .marquee-item {
+        flex      : 0 0 360px;
+        min-height: 0;
+        height    : auto;
+    }
+
+    .item-desc {
+        -webkit-line-clamp: 5;
+        line-clamp        : 5;
     }
 }

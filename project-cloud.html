@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>雲端庫存管理系統 | 專案詳情</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="projectDetails.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/projectDetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -32,35 +32,90 @@
 
             <div class="detail-content">
                 <div class="detail-main">
-                    <h3>專案背景</h3>
-                    <p>許多中小型企業在管理倉儲時仍依賴 Excel 或紙本記錄，這導致了數據滯後與人為錯誤。本專案開發了一個雲端化的 SaaS 平台，讓企業能隨時隨地掌握資產流向。</p>
+                    <div class="media-box slider-container">
+                        <div class="slider-wrapper" id="sliderWrapper">
+                            <div class="slide">
+                                <img src="images/pic-1.jpg" alt="專案架構圖">
+                                <p class="media-caption">專案架構圖 / 系統預覽</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-2.jpg" alt="介面預覽">
+                                <p class="media-caption">主要儀表板介面1</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-3.jpg" alt="介面預覽">
+                                <p class="media-caption">主要儀表板介面2</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-4.jpg" alt="介面預覽">
+                                <p class="media-caption">主要儀表板介面3</p>
+                            </div>
+                        </div>
 
-                    <h3>核心開發重點</h3>
-                    <ul>
-                        <li><strong>資料一致性：</strong> 使用資料庫事務 (Transactions) 確保在高併發環境下庫存扣減準確無誤。</li>
-                        <li><strong>自動化預警：</strong> 整合 SendGrid API，當品項低於安全庫存時，系統會自動發送補貨通知。</li>
-                        <li><strong>容器化部署：</strong> 使用 Docker 封裝應用環境，並部署於 AWS ECS 實現自動擴展。</li>
-                    </ul>
+                        <div class="slider-dots" id="sliderDots"></div>
+                        <div class="slider-thumbs" id="sliderThumbs"></div>
+                    </div>
 
-                    <h3>技術挑戰與學習</h3>
-                    <p>在開發初期，大批量資料匯入會導致 API 響應過慢。我後來改用 <strong>Redis 緩存機制</strong> 處理頻繁讀取的數據，並優化了 SQL 查詢索引，將查詢效率提升了約
-                        60%。</p>
+                    <div class="info-section">
+                        <h3> 專案概述</h3>
+                        <p>這是一個為中小型企業設計的 SaaS 平台，旨在解決傳統人工清點庫存效率低下且易出錯的問題。系統支援即時庫存追蹤、自動補貨提醒以及多倉儲管理。</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 核心功能</h3>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <strong>即時儀表板</strong>
+                                <p>透過視覺化圖表掌握當前庫存水位。</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-bell"></i>
+                                <strong>自動化通知</strong>
+                                <p>低於預設值時自動發送 Email 通知。</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-link"></i>
+                                <strong>API 整合</strong>
+                                <p>支援與 Shopify 等電商平台同步。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 技術挑戰與解決方案</h3>
+                        <p>在開發過程中，處理「併發下單導致的庫存超賣」是最大的挑戰。我透過資料庫的<strong>樂觀鎖 (Optimistic Locking)</strong>
+                            機制解決了這個問題，確保在高流量下資料的一致性。</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 功能演示影片</h3>
+                        <div class="media-box project-video">
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/oC_TCTbs4PE"
+                                    title="專案演示影片" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <aside class="detail-sidebar">
                     <div class="sidebar-box">
                         <h4>專案資訊</h4>
-                        <p><strong>開發日期：</strong> 2025.01 - 2025.06</p>
-                        <p><strong>專案規模：</strong> 個人獨立開發</p>
-                        <p><strong>主要技術：</strong> RESTful API, ORM (Prisma)</p>
+                        <ul class="sidebar-info-list">
+                            <li><span>開發週期</span> 2025.01 - 2025.06</li>
+                            <li><span>專案規模</span> 個人獨立開發</li>
+                            <li><span>擔任角色</span> 全端開發、架構設計</li>
+                            <li><span>部署環境</span> AWS / Docker</li>
+                            <li><span>主要技術</span> RESTful API, ORM (Prisma)</li>
+                        </ul>
                         <hr>
                         <div class="project-links">
-                            <a href="https://github.com/yourid/repo" class="btn-primary" target="_blank">
-                                <i class="fab fa-github"></i> 查看 Source Code
-                            </a>
-                            <a href="#" class="btn-secondary" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> 線上 Demo
-                            </a>
+                            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> 程式碼</a>
+                            <a href="#" class="btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i>
+                                線上演示</a>
                         </div>
                     </div>
                 </aside>
@@ -68,7 +123,8 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/projectDetails.js"></script>
 </body>
 
 </html>

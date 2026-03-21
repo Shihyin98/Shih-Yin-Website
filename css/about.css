@@ -160,6 +160,14 @@
     margin-top           : 20px;
 }
 
+.school-logo {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    margin-right: 8px;
+    object-fit: contain;
+}
+
 .edu-sub-section strong {
     display       : flex;
     align-items   : center;

@@ -1,15 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 所有頁面都在根目錄，因此直接載入 partials
+  const partialPathPrefix = "";
+
   /**
    * [1. 載入導覽列]
    * 從 partials/navbar.html 載入並初始化互動邏輯
    */
   const loadNavbar = async () => {
+    const placeholder = document.getElementById("navbar-include");
+    if (placeholder) {
+      // 最小改動：先顯示快速 navbar skeleton，讓頁面不會延遲空白
+      placeholder.innerHTML = `
+      <header class="navbar">
+        <div class="container">
+          <a href="index.html" class="logo">PORTFOLIO.</a>
+          <button class="menu-toggle" aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <ul id="nav-menu" class="nav-links">
+            <li><a href="index.html">首頁</a></li>
+            <li><a href="projects.html">作品集</a></li>
+            <li><a href="about.html">關於我</a></li>
+            <li><a href="skills.html">專業技能</a></li>
+            <li><a href="contact.html">聯絡我</a></li>
+          </ul>
+        </div>
+      </header>`;
+      initNavbarLogic();
+    }
     try {
-      const res = await fetch("partials/navbar.html");
+      const res = await fetch(`${partialPathPrefix}partials/navbar.html`);
       if (!res.ok) throw new Error("導覽列檔案遺失");
       const html = await res.text();
-
-      const placeholder = document.getElementById("navbar-include");
       if (placeholder) {
         placeholder.innerHTML = html;
         initNavbarLogic();
@@ -25,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   const loadFooter = async () => {
     try {
-      const res = await fetch("partials/footer.html");
+      const res = await fetch(`${partialPathPrefix}partials/footer.html`);
       if (!res.ok) throw new Error("頁尾檔案遺失");
       const html = await res.text();
 
@@ -126,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (p) => `
         <article class="project-card">
-            <div class="project-img-container" style="background: ${p.color}">
-                <span style="font-size: 1.5rem;">${p.title}</span>
+            <div class="project-img-container">
+                <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: contain;">
                 <div class="project-overlay">
                     <a href="${
                       p.link
@@ -140,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h3 style="margin-bottom: 10px;">${p.title}</h3>
                 <p style="font-size: 0.9rem; color: #64748b;">${p.desc}</p>
                 <div class="tags">
+                    ${p.hashTags ? p.hashTags.map((h) => `<span class="hashTag">${h}</span>`).join("") : ""}
                     ${p.tags
                       .map((t) => `<span class="tag">${t}</span>`)
                       .join("")}
@@ -189,35 +214,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * [5. 跑馬燈渲染]
-   * 亂數排序並產生無縫滾動內容
+   * [5. 作品卡片跑馬燈]
+   * 產生無縫滾動卡片內容
    */
   function initMarquee() {
     const container = document.getElementById("marquee-content");
     // 檢查容器是否存在且資料是否載入
     if (!container || typeof projectsData === "undefined") return;
 
-    // 1. 亂數排序 (Fisher-Yates Shuffle)
-    const shuffled = [...projectsData].sort(() => Math.random() - 0.5);
-
-    // 2. 產生 HTML 結構
-    const itemsHTML = shuffled
+    // 產生 HTML 結構
+    const itemsHTML = projectsData
       .map(
         (p) => `
       <a href="${p.link}" class="marquee-item">
-        <div class="marquee-visual" style="background: ${p.color}">
-          ${p.title[0]}
+        <div class="item-header">
+          <div class="marquee-visual">
+            <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+          </div>
+          <div class="marquee-info">
+            <h4>${p.title}</h4>
+          </div>
         </div>
-        <div class="marquee-info">
-          <h4>${p.title}</h4>
-          <p>${p.desc}</p>
+        <p class="item-desc">${p.desc}</p>
+        <div class="item-tags">
+          ${p.hashTags ? p.hashTags.map((hashTag) => `<span class="hashTag">${hashTag}</span>`).join("") : ""}
+          ${p.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
       </a>
     `
       )
       .join("");
 
-    // 3. 重複兩次內容以達成無縫滾動視覺效果
+    // 重複兩次內容以達成無縫滾動
     container.innerHTML = itemsHTML + itemsHTML;
   }
 

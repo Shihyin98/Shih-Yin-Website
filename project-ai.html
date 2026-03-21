@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖像辨識自動化工具 | 專案詳情</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/projectDetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="navbar-include"></div>
+
+    <main class="container">
+        <section class="project-detail">
+            <a href="projects.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回作品集</a>
+
+            <div class="detail-header">
+                <h1>圖像辨識自動化工具</h1>
+                <div class="detail-tags">
+                    <span>Python</span>
+                    <span>TensorFlow</span>
+                    <span>OpenCV</span>
+                    <span>Flask</span>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-main">
+                    <div class="media-box slider-container">
+                        <div class="slider-wrapper" id="sliderWrapper">
+                            <div class="slide">
+                                <img src="images/pic-3.jpg" alt="缺陷辨識結果">
+                                <p class="media-caption">模型辨識與缺陷標註結果</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-2.jpg" alt="資料處理流程">
+                                <p class="media-caption">資料前處理與訓練流程</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-1.jpg" alt="模型評估面板">
+                                <p class="media-caption">準確率與召回率評估面板</p>
+                            </div>
+                            <div class="slide">
+                                <img src="images/pic-4.jpg" alt="推論 API 介面">
+                                <p class="media-caption">推論 API 與批次檢測介面</p>
+                            </div>
+                        </div>
+
+                        <div class="slider-dots" id="sliderDots"></div>
+                        <div class="slider-thumbs" id="sliderThumbs"></div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 專案概述</h3>
+                        <p>本專案透過深度學習模型進行圖像分類與瑕疵偵測，目標是降低人工檢測成本，提升工業檢測流程的速度與一致性。</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 核心功能</h3>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-eye"></i>
+                                <strong>影像辨識</strong>
+                                <p>自動辨識產品影像中的缺陷類型。</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-cogs"></i>
+                                <strong>批次檢測</strong>
+                                <p>支援大量圖片批次上傳與推論。</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <strong>效能追蹤</strong>
+                                <p>即時顯示模型準確率與誤判分析。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3> 技術挑戰與解決方案</h3>
+                        <p>早期樣本分布不均造成模型偏差，我透過資料增強與類別加權訓練，顯著提升少數類別辨識能力與整體穩定性。</p>
+                    </div>
+                </div>
+
+                <aside class="detail-sidebar">
+                    <div class="sidebar-box">
+                        <h4>專案資訊</h4>
+                        <ul class="sidebar-info-list">
+                            <li><span>開發週期</span> 2024.03 - 2024.07</li>
+                            <li><span>專案規模</span> 大學專題</li>
+                            <li><span>擔任角色</span> 模型訓練與 API 開發</li>
+                            <li><span>部署環境</span> Docker / Local Server</li>
+                            <li><span>主要技術</span> Python / TensorFlow</li>
+                        </ul>
+                        <hr>
+                        <div class="project-links">
+                            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> 程式碼</a>
+                            <a href="#" class="btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i>
+                                線上演示</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/projectDetails.js"></script>
+</body>
+
+</html>
