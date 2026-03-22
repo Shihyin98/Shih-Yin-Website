@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 所有頁面都在根目錄，因此直接載入 partials
   const partialPathPrefix = "";
+  let projectsData = [];
+  let aboutData = { education: [], experience: [] };
 
   /**
    * [1. 載入導覽列]
@@ -291,6 +293,93 @@ document.addEventListener("DOMContentLoaded", () => {
     if (textElement) type();
   }
 
+    /**
+     * [6. 載入專案 JSON 資料]
+     * 從 js/projectsData.json fetch 資料後再渲染作品集
+     */
+    async function loadProjectsData() {
+      try {
+        const res = await fetch(`${partialPathPrefix}js/projectsData.json`);
+        if (!res.ok) throw new Error('projectsData.json 載入失敗');
+        projectsData = await res.json();
+      } catch (err) {
+        console.error('載入專案資料失敗:', err);
+      }
+      initProjectFilters();
+      renderProjects();
+      initMarquee();
+    }
+
+    function renderAboutCards(items = []) {
+      return items
+        .map((item) => {
+          const headerTitle = item.schoolLogo
+            ? `<h4><img class="school-logo" src="${item.schoolLogo}" alt="${item.schoolAlt || ""}" /> ${item.title}</h4>`
+            : `<h4><i class="${item.titleIcon || "fas fa-briefcase"}"></i> ${item.title}</h4>`;
+
+          const leftContent = item.leftType === "links"
+            ? `<div class="exp-links">${(item.leftItems || [])
+                .map(
+                  (linkItem) =>
+                    `<a href="${linkItem.url || "#"}" class="exp-link"><i class="fas fa-external-link-alt"></i>${linkItem.label || "Project Link"}</a>`
+                )
+                .join("")}</div>`
+            : `<div class="course-tags">${(item.leftItems || [])
+                .map((tag) => `<span>${tag}</span>`)
+                .join("")}</div>`;
+
+          return `
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div class="edu-header">
+                ${headerTitle}
+                <span class="edu-date">${item.date || ""}</span>
+              </div>
+              <p class="edu-degree">${item.degree || ""}</p>
+              <div class="edu-content">
+                <div class="edu-info-grid">
+                  <div class="edu-sub-section">
+                    <strong><i class="${item.leftIcon || "fas fa-link"}"></i>${item.leftTitle || "Related"}</strong>
+                    ${leftContent}
+                  </div>
+                  <div class="edu-sub-section">
+                    <strong><i class="${item.rightIcon || "fas fa-list-check"}"></i>${item.rightTitle || "Highlights"}</strong>
+                    <ul class="edu-details">
+                      ${(item.rightItems || [])
+                        .map((line) => `<li>${line}</li>`)
+                        .join("")}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    async function loadAboutData() {
+      const educationContainer = document.getElementById("education-timeline");
+      const experienceContainer = document.getElementById("experience-timeline");
+      if (!educationContainer && !experienceContainer) return;
+
+      try {
+        const res = await fetch(`${partialPathPrefix}js/aboutData.json`);
+        if (!res.ok) throw new Error("aboutData.json 載入失敗");
+        aboutData = await res.json();
+      } catch (err) {
+        console.error("載入 About 資料失敗:", err);
+        return;
+      }
+
+      if (educationContainer) {
+        educationContainer.innerHTML = renderAboutCards(aboutData.education);
+      }
+      if (experienceContainer) {
+        experienceContainer.innerHTML = renderAboutCards(aboutData.experience);
+      }
+    }
+
   /**
    * [NEW: 5. 統一設定網站圖標]
    * 自動在 <head> 中插入 Favicon 連結
@@ -314,8 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupFavicon();
   loadNavbar();
   loadFooter();
-  initProjectFilters();
-  renderProjects();
-  initMarquee(); // 啟動跑馬燈
+  loadProjectsData();
+  loadAboutData();
   initTypingEffect();
 });

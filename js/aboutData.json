@@ -1,0 +1,100 @@
+{
+  "education": [
+    {
+      "title": "National Chung Cheng University",
+      "schoolLogo": "./images/ccu.png",
+      "schoolAlt": "CCU",
+      "date": "2021 - 2025",
+      "degree": "Master of Science in Computer Science and Information Engineering",
+      "leftTitle": "Selected Courses",
+      "leftIcon": "fas fa-book",
+      "leftType": "tags",
+      "leftItems": ["資料庫管理", "作業系統", "演算法", "網路通訊"],
+      "rightTitle": "Achievements and Honors",
+      "rightIcon": "fas fa-award",
+      "rightItems": [
+        "Thesis: alphaVib: A New Approach for Text Message Reading via Vibration Feedback and Wrist Gesture Recognition based on Smartwatch",
+        "Major in Human-Computer Interaction (HCI), Internet of Things (IoT)"
+      ]
+    },
+    {
+      "title": "National Quemoy University",
+      "schoolLogo": "./images/nqu.png",
+      "schoolAlt": "NQU",
+      "date": "2017 - 2021",
+      "degree": "Bachelor of Science in Computer Science and Information Engineering",
+      "leftTitle": "Selected Courses",
+      "leftIcon": "fas fa-book",
+      "leftType": "tags",
+      "leftItems": ["資料庫管理", "作業系統", "演算法", "網路通訊"],
+      "rightTitle": "Achievements and Honors",
+      "rightIcon": "fas fa-award",
+      "rightItems": [
+        "Academic Excellence: 3.2/4.0 (Rank: 2/45, Top 4.8%)",
+        "Selected for an exchange program at NJU, enhancing expertise in Computer Science and Technology. (Sept. 2019-Jan. 2020)"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Competition Experience",
+      "titleIcon": "fas fa-trophy",
+      "date": "2023 - 2025",
+      "degree": "參與科技競賽與專題發表，聚焦 AIoT、系統整合與應用實作",
+      "leftTitle": "Related Projects",
+      "leftIcon": "fas fa-link",
+      "leftType": "links",
+      "leftItems": [
+        { "label": "Project Name 1", "url": "#" },
+        { "label": "Project Name 2", "url": "#" }
+      ],
+      "rightTitle": "Highlights",
+      "rightIcon": "fas fa-list-check",
+      "rightItems": [
+        "參與跨領域專題競賽，負責系統設計與技術整合",
+        "完成從需求分析、功能開發到成果展示的完整流程",
+        "累積簡報發表、團隊分工與時程管理經驗"
+      ]
+    },
+    {
+      "title": "Conference and Paper Presentation",
+      "titleIcon": "fas fa-file-alt",
+      "date": "2024",
+      "degree": "以第一作者身份在國際研討會發表論文，分享 HCI 領域研究成果",
+      "leftTitle": "Related Projects",
+      "leftIcon": "fas fa-link",
+      "leftType": "links",
+      "leftItems": [
+        { "label": "Paper Link", "url": "#" },
+        { "label": "Conference Page", "url": "#" }
+      ],
+      "rightTitle": "Highlights",
+      "rightIcon": "fas fa-list-check",
+      "rightItems": [
+        "發表論文：alphaVib - 基於智慧手錶的震動回饋文字訊息閱讀系統",
+        "完成英文口頭報告與問答環節，與國際學者交流研究觀點",
+        "獲得來自 HCI 社群的評審回饋，強化研究方法與表達能力"
+      ]
+    },
+    {
+      "title": "Workshop Experience",
+      "titleIcon": "fas fa-chalkboard-teacher",
+      "date": "2022 - 2025",
+      "degree": "參與開發工作坊與技術訓練，提升工程實務與協作能力",
+      "leftTitle": "Related Projects",
+      "leftIcon": "fas fa-link",
+      "leftType": "links",
+      "leftItems": [
+        { "label": "Project Name 1", "url": "#" },
+        { "label": "Project Name 2", "url": "#" }
+      ],
+      "rightTitle": "Highlights",
+      "rightIcon": "fas fa-list-check",
+      "rightItems": [
+        "透過實作導向課程強化全端開發與部署流程",
+        "建立可維護的程式碼習慣與團隊溝通節奏",
+        "熟悉從需求討論到版本交付的協作方式"
+      ]
+    }
+  ]
+}
