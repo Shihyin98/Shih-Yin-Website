@@ -155,7 +155,7 @@
 
 .edu-info-grid {
     display              : grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 3fr;
     gap                  : 30px;
     margin-top           : 20px;
 }
@@ -216,11 +216,11 @@
     /* 淺灰色背景，增加層次感 */
     color: #475569;
     /* 深灰色文字，閱讀舒適 */
-    padding: 4px 12px;
+    padding: 3px 10px;
     /* 標籤內距 */
     border-radius: 6px;
     /* 稍微圓潤的直角感，顯得專業 */
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     /* 字體略小，區分主次資訊 */
     border: 1px solid var(--color-muted);
     /* 極細邊框，提升精緻度 */
@@ -234,6 +234,36 @@
 
 /* --- 滑過標籤時的視覺效果 --- */
 /* 已與 .skill-tags hover 合併為一組：.skill-tags span:hover, .course-tags span:hover */
+
+/* --- Experience 專案連結 --- */
+.exp-links {
+    display       : flex;
+    flex-direction: column;
+    gap           : 10px;
+    margin-top    : 5px;
+}
+
+.exp-link {
+    display        : inline-flex;
+    align-items    : center;
+    gap            : 6px;
+    color          : var(--color-primary);
+    font-size      : 0.85rem;
+    font-weight    : 500;
+    text-decoration: none;
+    padding        : 5px 10px;
+    border-radius  : 6px;
+    border         : 1px solid var(--color-primary-10);
+    background     : var(--color-primary-10);
+    transition     : all var(--transition-fast);
+    word-break     : break-word;
+}
+
+.exp-link:hover {
+    background  : var(--color-primary);
+    color       : #ffffff;
+    border-color: var(--color-primary);
+}
 
 /* --- 整合後的響應式調整 --- */
 @media (max-width: 768px) {
