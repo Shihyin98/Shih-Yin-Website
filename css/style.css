@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 /* --- 1. 全域變數與重設 --- */
 :root {
-    --primary: #2563eb;
-    --dark   : #0f172a;
-    --text   : #334155;
-    --light  : #f8fafc;
-    --white  : #ffffff;
-    --shadow : 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --border : #e2e8f0;
+    --primary   : #2563eb;
+    --primary-10: rgba(37, 99, 235, 0.1);
+    --dark      : #0f172a;
+    --text      : #334155;
+    --slate     : #475569;
+    --muted     : #64748b;
+    --light     : #f8fafc;
+    --surface   : #f1f5f9;
+    --white     : #ffffff;
+    --shadow    : 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-sm : 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    --shadow-md : 0 10px 15px -3px rgba(37, 99, 235, 0.1);
+    --border    : #e2e8f0;
+    --radius-lg : 12px;
+    --transition: 0.2s ease;
 }
 
 * {
@@ -30,8 +40,7 @@ html {
 }
 
 .container {
-    width    : 90%;
-    max-width: 1100px;
+    width    : min(1100px, 92%);
     margin   : 0 auto;
 }
 
@@ -97,7 +106,8 @@ html {
 /* --- 3. 導覽列元素樣式 --- */
 .logo {
     font-size      : 1.5rem;
-    font-weight    : 800;
+    font-family    : 'Inter', 'Segoe UI', -apple-system, sans-serif;
+    font-weight    : 900;
     color          : var(--primary);
     text-decoration: none;
     letter-spacing : -1px;
@@ -151,7 +161,7 @@ html {
 
 /* --- 5. 內容區段樣式 (Hero & Section) --- */
 section {
-    padding: 80px 0;
+    padding: clamp(52px, 7vw, 80px) 0;
 }
 
 /* Hero 主容器 */
@@ -160,8 +170,8 @@ section {
     align-items    : center;
     justify-content: space-between;
     min-height     : 80vh;
-    gap            : 2rem;
-    padding        : 2rem 0;
+    gap            : clamp(1.25rem, 3vw, 2.5rem);
+    padding        : clamp(1.25rem, 4vw, 2.5rem) 0;
     max-width      : 100%;
     overflow-x     : hidden;
 }
@@ -173,17 +183,31 @@ section {
 }
 
 .hero-left h1 {
-    font-size    : 3rem;
+    font-size    : clamp(2rem, 5vw, 3rem);
     color        : var(--dark);
     margin-bottom: 0.5rem;
 }
 
 .typing-container {
-    font-size    : 1.8rem;
+    font-size    : clamp(1.2rem, 3vw, 1.8rem);
     font-weight  : 600;
     margin-bottom: 1.5rem;
-    height       : 2.2rem;
+    min-height   : 2.2rem;
     /* 固定高度防止跳動 */
+}
+
+.hero-left p {
+    font-size : clamp(1rem, 1.5vw, 1.1rem);
+    max-width : 60ch;
+}
+
+.hero-right {
+    flex           : 1;
+    position       : relative;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    min-height     : 360px;
 }
 
 .primary-text {
@@ -198,7 +222,7 @@ section {
 /* 背景代碼圖片飾點 */
 .code-img-decoration {
     position      : absolute;
-    width         : 100%;
+    width         : min(100%, 520px);
     max-width     : 450px;
     /* 防止太寬撐開頁面 */
     opacity       : 0.15;
@@ -210,6 +234,10 @@ section {
     /* 讓滑鼠可以穿透圖片，不影響點擊 */
     filter        : blur(2px) grayscale(1);
     /* 微量模糊並去色，增加質感 */
+    transition    : filter .22s ease, transform .24s ease;
+    left          : 50%;
+    top           : 50%;
+    transform     : translate(-50%, -50%) rotate(-12deg) skewX(5deg);
 }
 
 /* 形象圖包裝（這部分可以做圓形或有機形狀） */
@@ -218,14 +246,27 @@ section {
     position     : relative;
     z-index      : 2;
     /* 確保在背景圖片之上 */
-    width        : 350px;
-    height       : 350px;
+    width        : clamp(240px, 32vw, 350px);
+    height       : clamp(240px, 32vw, 350px);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     background   : linear-gradient(45deg, var(--primary), #60a5fa);
     overflow     : hidden;
     box-shadow   : var(--shadow);
     /* 增加輕微的浮動動畫 */
     animation    : float 6s ease-in-out infinite;
+    transition   : opacity .28s ease, transform .24s ease, border-radius .24s ease, box-shadow .24s ease;
+}
+
+.hero-right.temp-layer-swap .code-img-decoration {
+    z-index   : 3;
+    filter    : blur(0.7px) grayscale(0.3);
+    transform : translate(-50%, -50%) rotate(-8deg) skewX(3deg) scale(1.05);
+}
+
+.hero-right.temp-layer-swap .profile-image-wrapper {
+    z-index       : 1;
+    opacity       : 0;
+    pointer-events: none;
 }
 
 .profile-img {
@@ -258,6 +299,9 @@ section {
 
 .cta-container {
     padding-top: 50px;
+    display    : flex;
+    gap        : 12px;
+    flex-wrap  : wrap;
 }
 
 .btn-primary {
@@ -488,6 +532,28 @@ section {
 
 
 
+/* 平板版本 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero {
+        min-height: auto;
+    }
+
+    .hero-left h1 {
+        font-size: clamp(2.1rem, 4.2vw, 2.6rem);
+    }
+
+    .marquee-item {
+        flex      : 0 0 360px;
+        min-height: 0;
+        height    : auto;
+    }
+
+    .item-desc {
+        -webkit-line-clamp: 5;
+        line-clamp        : 5;
+    }
+}
+
 /* --- 6. 手機版 RWD 回應式設計 --- */
 @media (max-width: 768px) {
 
@@ -527,7 +593,8 @@ section {
         align-items    : center;
         /* 關鍵：確保所有子元素在水平方向置中 */
         gap            : 2rem;
-        padding        : 50px 0;
+        padding        : 40px 0;
+        min-height     : auto;
     }
 
     .hero-left {
@@ -537,21 +604,42 @@ section {
 
 
     .hero-right {
-        width: 100%;
+        width     : 100%;
+        min-height: 280px;
     }
 
     .code-img-decoration {
         width    : 100%;
-        transform: rotate(-5deg);
+        transform: translate(-50%, -50%) rotate(-5deg);
         /* 手機版傾斜角度縮小 */
     }
 
     .profile-image-wrapper {
-        width : 280px;
+        width : min(76vw, 300px);
         /* 手機版稍微縮小圖片 */
-        height: 280px;
+        height: min(76vw, 300px);
         margin: 0 auto;
         /* 額外確保外邊距自動平衡 */
+    }
+
+    .cta-container {
+        padding-top     : 28px;
+        justify-content : center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width     : min(100%, 320px);
+        text-align: center;
+    }
+
+    .navbar {
+        top  : 10px;
+        width: 94%;
+    }
+
+    body {
+        padding-top: 88px;
     }
 
     /* 單列跑馬燈響應式 */
@@ -578,16 +666,20 @@ section {
     }
 }
 
-/* 平板版本 */
-@media (max-width: 1024px) {
-    .marquee-item {
-        flex      : 0 0 360px;
-        min-height: 0;
-        height    : auto;
+@media (max-width: 480px) {
+    .container {
+        width: 94%;
     }
 
-    .item-desc {
-        -webkit-line-clamp: 5;
-        line-clamp        : 5;
+    .hero-left h1 {
+        font-size: clamp(1.6rem, 8vw, 2rem);
+    }
+
+    .typing-container {
+        margin-bottom: 1rem;
+    }
+
+    .marquee-item {
+        flex: 0 0 90vw;
     }
 }

@@ -1,5 +1,5 @@
 /* --- 佈局基礎 --- */
-.container {
+.contact-container {
     max-width: 980px; /* 縮小整體版心，避免卡片過度占版 */
     margin: 0 auto;
     padding:2rem 1rem;
@@ -157,7 +157,7 @@
 }
 
 @media (max-width: 768px) {
-    .container {
+    .contact-container {
         padding: 2.5rem 1rem;
     }
 

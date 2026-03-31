@@ -1,8 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 所有頁面都在根目錄，因此直接載入 partials
-  const partialPathPrefix = "";
+  // 依據目前頁面層級決定資源前綴，確保根目錄與 projects 子頁都能正確載入
+  const isProjectsSubPage = window.location.pathname.includes("/projects/");
+  const pathPrefix = isProjectsSubPage ? "../" : "";
+  const withPrefix = (relativePath) => `${pathPrefix}${relativePath}`;
   let projectsData = [];
   let aboutData = { education: [], experience: [] };
+
+  function normalizeNavbarLinks(scope = document) {
+    if (!isProjectsSubPage) return;
+    scope.querySelectorAll(".navbar a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      const isExternal = /^(?:[a-z]+:|#|\/)/i.test(href);
+      if (isExternal || href.startsWith("../")) return;
+      link.setAttribute("href", withPrefix(href));
+    });
+  }
 
   /**
    * [1. 載入導覽列]
@@ -15,29 +28,30 @@ document.addEventListener("DOMContentLoaded", () => {
       placeholder.innerHTML = `
       <header class="navbar">
         <div class="container">
-          <a href="index.html" class="logo">PORTFOLIO.</a>
+          <a href="${withPrefix("index.html")}" class="logo">PORTFOLIO.</a>
           <button class="menu-toggle" aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
           </button>
           <ul id="nav-menu" class="nav-links">
-            <li><a href="index.html">首頁</a></li>
-            <li><a href="projects.html">作品集</a></li>
-            <li><a href="about.html">關於我</a></li>
-            <li><a href="skills.html">專業技能</a></li>
-            <li><a href="contact.html">聯絡我</a></li>
+            <li><a href="${withPrefix("index.html")}">首頁</a></li>
+            <li><a href="${withPrefix("projects.html")}">作品集</a></li>
+            <li><a href="${withPrefix("about.html")}">關於我</a></li>
+            <li><a href="${withPrefix("skills.html")}">專業技能</a></li>
+            <li><a href="${withPrefix("contact.html")}">聯絡我</a></li>
           </ul>
         </div>
       </header>`;
       initNavbarLogic();
     }
     try {
-      const res = await fetch(`${partialPathPrefix}partials/navbar.html`);
+      const res = await fetch(withPrefix("partials/navbar.html"));
       if (!res.ok) throw new Error("導覽列檔案遺失");
       const html = await res.text();
       if (placeholder) {
         placeholder.innerHTML = html;
+        normalizeNavbarLinks(placeholder);
         initNavbarLogic();
       }
     } catch (err) {
@@ -51,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   const loadFooter = async () => {
     try {
-      const res = await fetch(`${partialPathPrefix}partials/footer.html`);
+      const res = await fetch(withPrefix("partials/footer.html"));
       if (!res.ok) throw new Error("頁尾檔案遺失");
       const html = await res.text();
 
@@ -126,7 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".nav-links a").forEach((link) => {
       const href = link.getAttribute("href");
-      if (href === currentPath) {
+      const hrefFile = href ? href.split("/").pop() : "";
+      if (hrefFile === currentPath) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
@@ -293,13 +308,43 @@ document.addEventListener("DOMContentLoaded", () => {
     if (textElement) type();
   }
 
+  // Hero 視覺區：桌機 hover 與手機觸控都能觸發淡出/淡入
+  function initHeroLayerSwapOnMouse() {
+    const heroRight = document.querySelector(".hero-right");
+    if (!heroRight) return;
+
+    const showSwap = () => {
+      heroRight.classList.add("temp-layer-swap");
+    };
+
+    const hideSwap = () => {
+      heroRight.classList.remove("temp-layer-swap");
+    };
+
+    heroRight.addEventListener("mouseenter", showSwap);
+    heroRight.addEventListener("mouseleave", hideSwap);
+
+    // 手機/觸控裝置：按下視為移入，離開/取消視為移出
+    heroRight.addEventListener("touchstart", showSwap, { passive: true });
+    heroRight.addEventListener("touchend", hideSwap);
+    heroRight.addEventListener("touchcancel", hideSwap);
+
+    // 觸控筆或部分裝置的 Pointer 事件補強
+    heroRight.addEventListener("pointerdown", showSwap);
+    heroRight.addEventListener("pointerup", hideSwap);
+    heroRight.addEventListener("pointercancel", hideSwap);
+  }
+
     /**
      * [6. 載入專案 JSON 資料]
      * 從 js/projectsData.json fetch 資料後再渲染作品集
      */
     async function loadProjectsData() {
+      const hasProjectConsumers = document.getElementById("project-list") || document.getElementById("marquee-content");
+      if (!hasProjectConsumers) return;
+
       try {
-        const res = await fetch(`${partialPathPrefix}js/projectsData.json`);
+        const res = await fetch(withPrefix("js/projectsData.json"));
         if (!res.ok) throw new Error('projectsData.json 載入失敗');
         projectsData = await res.json();
       } catch (err) {
@@ -364,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!educationContainer && !experienceContainer) return;
 
       try {
-        const res = await fetch(`${partialPathPrefix}js/aboutData.json`);
+        const res = await fetch(withPrefix("js/aboutData.json"));
         if (!res.ok) throw new Error("aboutData.json 載入失敗");
         aboutData = await res.json();
       } catch (err) {
@@ -385,8 +430,8 @@ document.addEventListener("DOMContentLoaded", () => {
    * 自動在 <head> 中插入 Favicon 連結
    */
   const setupFavicon = () => {
-    const iconPath = "images/happy-face.png"; // 你的圖片路徑
-    
+    const iconPath = withPrefix("images/happy-face.png"); // 你的圖片路徑
+
     // 檢查是否已經存在 favicon 標籤，若無則建立
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
@@ -394,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
       link.rel = 'icon';
       document.head.appendChild(link);
     }
-    
+
     link.href = iconPath;
     link.type = 'image/png'; // 修正為正確的 MIME 類型
   };
@@ -406,4 +451,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadProjectsData();
   loadAboutData();
   initTypingEffect();
+  initHeroLayerSwapOnMouse();
 });

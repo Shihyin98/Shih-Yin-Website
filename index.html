@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/happy-face.png" type="image/png">
-    <title>首頁 | Sherry's Portfolio</title>
+    <title>首頁 | Shih-Yin(Sherry) Chen</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/flipbook.css">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
                     <span id="typing-text" class="primary-text"></span>
                     <span class="cursor">|</span>
                 </div>
-                <p>我專注於全端開發與雲端系統整合，擅長把需求落地成可維運、可擴充的產品。這裡整理了我在網站、AI 與系統開發上的代表成果與技術實作。</p>
+                <p>注於全端開發與雲端系統整合，擅長把需求落地成可維運、可擴充的產品。這裡整理了我在網站、AI 與系統開發上的代表成果與技術實作。</p>
 
                 <div class="cta-container">
                     <a href="projects.html" class="btn-primary">瀏覽作品</a>
@@ -30,7 +31,7 @@
 
             <div class="hero-right">
                 <div class="code-img-decoration">
-                    <img src="images/pic-4.jpg" alt="Code Background">
+                    <img src="images/working.jpg" alt="Code Background">
                 </div>
 
                 <div class="profile-image-wrapper">
@@ -52,10 +53,30 @@
             </div>
         </section>
 
+        <hr class="section-divider">
+
+        <section class="flipbook-section">
+            <h3 class="sub-title">我的履歷</h3>
+            <div class="flipbook-container">
+                <div id="flipbook" class="flipbook">
+                    <!-- 頁面将由 JavaScript 动态生成 -->
+                </div>
+                <div class="flipbook-controls">
+                    <div class="flipbook-nav-group">
+                        <button id="prev-page" class="flip-btn" title="上一頁">← 上一頁</button>
+                        <span id="page-info" class="page-info">載入中...</span>
+                        <button id="next-page" class="flip-btn" title="下一頁">下一頁 →</button>
+                    </div>
+                    <a class="flip-btn flip-btn-open" href="assets/CV.pdf" target="_blank" rel="noopener noreferrer" title="開啟完整履歷">開啟完整履歷 ↗</a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script defer src="js/flipbook.js"></script>
     <script defer src="js/script.js"></script>
-    <script src="./js/projectsData.js"></script>
 </body>
 
 </html>

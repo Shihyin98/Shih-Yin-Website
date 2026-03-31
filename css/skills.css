@@ -3,95 +3,157 @@
     margin-top: 80px;
 }
 
-/* --- 技術分類卡片 --- */
-.skills-category-grid {
+/* --- 技能地圖呈現 --- */
+.skills-map-grid {
     display              : grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap                  : 25px;
-    /* min-height           : 80vh; */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap                  : 20px;
     padding              : 0 0 5rem 0;
 }
 
-.skill-category-card {
-    background   : #ffffff;
-    padding      : 30px;
-    border-radius: 16px;
-    border       : 1px solid #e2e8f0;
-    box-shadow   : 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    text-align   : center;
-    transition   : 0.3s ease;
+.skill-domain-card {
+    background   : var(--white);
+    padding      : 25px;
+    border-radius: 12px;
+    border       : 1px solid var(--border);
+    box-shadow   : var(--shadow-sm);
+    transition   : border-color .2s ease, background-color .2s ease;
 }
 
-.skill-category-card:hover {
-    transform   : translateY(-8px);
-    border-color: #2563eb;
-    box-shadow  : 0 10px 15px -3px rgba(37, 99, 235, 0.1);
+.domain-head {
+    display       : flex;
+    align-items   : center;
+    gap           : 12px;
+    margin-bottom : 16px;
 }
 
 .card-icon {
     font-size    : 2.5rem;
-    color        : #2563eb;
+    color        : var(--primary);
     margin-bottom: 20px;
 }
 
-.skill-category-card h3 {
-    margin-bottom: 20px;
-    color        : #0f172a;
+.domain-head h3 {
+    margin : 0;
+    color  : var(--dark);
+    font-size: 1.05rem;
 }
 
-.skill-tags {
-    display        : flex;
-    flex-wrap      : wrap;
-    gap            : 10px;
-    justify-content: center;
+.skill-list {
+    list-style : none;
+    padding    : 0;
+    margin     : 0;
+    display    : grid;
+    gap        : 14px;
 }
 
-.skill-tags span {
-    background   : #f1f5f9;
-    padding      : 6px 14px;
-    border-radius: 8px;
-    font-size    : 0.85rem;
-    border       : 1px solid #e2e8f0;
+.skill-list li {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    padding         : 8px 10px;
+    border          : 1px solid var(--border);
+    border-radius   : 8px;
+    background      : #f8fafc;
 }
 
-/* --- 證照卡片佈局 --- */
-.cert-card-grid {
+.skill-name {
+    color           : var(--dark);
+    font-size       : 0.9rem;
+}
+
+.skill-level {
+    font-size    : 0.78rem;
+    color        : #475569;
+    background   : #eef2f7;
+    border       : 1px solid #dbe3ee;
+    border-radius: 6px;
+    padding      : 2px 8px;
+    font-weight  : 600;
+}
+
+.domain-tags {
+    margin-top : 18px;
+    display    : flex;
+    flex-wrap  : wrap;
+    gap        : 8px;
+}
+
+.domain-tags span {
+    background   : #eff6ff;
+    border       : 1px solid #bfdbfe;
+    color        : #1e40af;
+    padding      : 5px 10px;
+    border-radius: 999px;
+    font-size    : 0.78rem;
+}
+
+/* --- 證照分組卡片 --- */
+.cert-group-grid {
     display              : grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap                  : 20px;
+    padding              : 0 0 5rem 0;
 }
 
-.professional-cert-card {
-    display      : flex;
-    align-items  : center;
-    background   : #ffffff;
-    padding      : 25px;
+.cert-group-card {
+    background   : var(--white);
+    border       : 1px solid var(--border);
     border-radius: 12px;
-    border       : 1px solid #e2e8f0;
-    gap          : 20px;
-    transition   : 0.3s;
+    padding      : 20px;
 }
 
-.professional-cert-card:hover {
-    background  : #f8fafc;
-    border-color: #2563eb;
+.cert-group-head {
+    display       : flex;
+    align-items   : center;
+    justify-content: space-between;
+    gap           : 10px;
+    margin-bottom : 12px;
 }
 
-.cert-icon {
-    font-size  : 2.5rem;
-    color      : #2563eb;
-    flex-shrink: 0;
+.cert-group-head h4 {
+    display      : inline-flex;
+    align-items  : center;
+    margin       : 0;
+    padding      : 5px 10px;
+    border       : 1px solid #cfe0ff;
+    border-radius: 999px;
+    background   : #eef4ff;
+    color        : #1e3a8a;
+    font-size    : 0.92rem;
+    font-weight  : 700;
 }
 
-.cert-info h4 {
-    color        : #0f172a;
-    margin-bottom: 5px;
+.cert-group-head p {
+    margin     : 0;
+    color      : #64748b;
+    font-size  : 0.8rem;
+    text-align : right;
+    white-space: nowrap;
 }
 
-.issuer {
-    color        : #64748b;
-    font-size    : 0.9rem;
-    margin-bottom: 4px;
+.cert-item {
+    padding       : 12px 2px;
+    border-bottom : 1px dashed #e2e8f0;
+}
+
+.cert-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cert-item h5 {
+    margin       : 0 0 4px;
+    color        : var(--dark);
+    font-size    : 0.95rem;
+    font-weight  : 600;
+}
+
+.cert-detail {
+    color        : #475569;
+    font-size    : 0.86rem;
+    margin-bottom: 6px;
+    line-height  : 1.45;
 }
 
 .date {
@@ -99,9 +161,17 @@
     color    : #94a3b8;
 }
 
+.cert-item-meta {
+    margin-top     : 6px;
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    gap            : 8px;
+}
+
 .cert-status {
     display      : inline-block;
-    margin-top   : 8px;
+    margin-top   : 0;
     font-size    : 0.75rem;
     background   : #dcfce7;
     color        : #166534;
@@ -110,10 +180,153 @@
     font-weight  : 600;
 }
 
+/* --- LeetCode 成績卡 --- */
+.leetcode-section {
+    display    : flex;
+    gap        : 40px;
+    align-items: flex-start;
+    flex-wrap  : wrap;
+    margin-top : 30px;
+    margin-bottom: 60px;
+}
+
+.leetcode-card-wrapper {
+    flex      : 1 1 380px;
+    min-width : 300px;
+    max-width : 500px;
+    background: var(--white);
+    border-radius: 16px;
+    border    : 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow  : hidden;
+    transition: 0.3s ease;
+}
+
+.leetcode-card-wrapper:hover {
+    transform   : translateY(-4px);
+    box-shadow  : var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.leetcode-card-img {
+    width  : 100%;
+    display: block;
+}
+
+.leetcode-highlights {
+    flex    : 1 1 280px;
+    display : flex;
+    flex-direction: column;
+    gap     : 20px;
+    justify-content: center;
+}
+
+.leetcode-link {
+    display     : inline-flex;
+    align-items : center;
+    gap         : 8px;
+    color       : var(--primary);
+    font-weight : 600;
+    font-size   : 0.95rem;
+    text-decoration: none;
+    transition  : color var(--transition);
+}
+
+.leetcode-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.leetcode-stats-grid {
+    display              : grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap                  : 12px;
+}
+
+.lc-stat-item {
+    display      : flex;
+    flex-direction: column;
+    align-items  : center;
+    gap          : 6px;
+    padding      : 16px 10px;
+    border-radius: 12px;
+    border       : 1px solid var(--border);
+}
+
+.lc-easy  { background: #f0fdf4; border-color: #86efac; }
+.lc-medium{ background: #fffbeb; border-color: #fcd34d; }
+.lc-hard  { background: #fef2f2; border-color: #fca5a5; }
+
+.lc-label {
+    font-size  : 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color      : var(--muted);
+}
+
+.lc-easy  .lc-label { color: #166534; }
+.lc-medium .lc-label { color: #92400e; }
+.lc-hard  .lc-label { color: #991b1b; }
+
+.lc-count {
+    font-size  : 1.6rem;
+    font-weight: 700;
+    color      : var(--dark);
+}
+
+.lc-note {
+    font-size  : 0.9rem;
+    color      : var(--muted);
+    line-height: 1.6;
+}
+
 /* RWD 調整 */
 @media (max-width: 768px) {
-    .professional-cert-card {
+    .skills-map-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-domain-card {
+        padding: 22px;
+    }
+
+    .cert-item-meta {
         flex-direction: column;
-        text-align    : center;
+        align-items   : flex-start;
+    }
+
+    .cert-group-head {
+        flex-direction: column;
+        align-items   : flex-start;
+        gap           : 6px;
+    }
+
+    .cert-group-head h4 {
+        padding  : 6px 11px;
+        font-size: 0.9rem;
+    }
+
+    .cert-group-head p {
+        text-align : left;
+        white-space: normal;
+        line-height: 1.45;
+    }
+
+    .leetcode-section {
+        flex-direction: column;
+        align-items   : stretch;
+        gap           : 24px;
+    }
+
+    .leetcode-card-wrapper {
+        flex     : 0 0 auto;
+        min-width: 0;
+        max-width: 100%;
+        width    : 100%;
+    }
+
+    .leetcode-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
